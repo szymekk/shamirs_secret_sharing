@@ -40,6 +40,7 @@ def encode(message: int, k: int, n: int, p: int) -> List[Point]:
     # skip 0 because the corresponding share: (0, f(0))
     # contains the secret: f(0) == message
     field_elements = range(1, p)
+    # todo add sampling with an algorithm that works for big populations
     xs = random.sample(field_elements, n)
     coeffs = [random.randint(0, p - 1) for _ in range(k)]
     coeffs[-1] = message
@@ -91,3 +92,15 @@ def decode(shares: List[Point], k: int, p: int) -> int:
     for i in range(k):
         acc += lagrange_at_zero_times_y(i)
     return acc % p
+
+
+def str_to_int(string: str) -> int:
+    string_as_bytes = string.encode()
+    string_as_int = int.from_bytes(string_as_bytes, byteorder='big')
+    return string_as_int
+
+
+def int_to_str(integer: int) -> str:
+    integer_as_bytes = integer.to_bytes((integer.bit_length() + 7) // 8, 'big')
+    integer_as_str = integer_as_bytes.decode()
+    return integer_as_str

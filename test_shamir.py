@@ -52,5 +52,40 @@ class TestShamirSecretSharing(unittest.TestCase):
             self.assertEqual(message, decoded)
 
 
+class TestStringSharing(unittest.TestCase):
+    def test_str_to_int_returns_int(self):
+        string = 'abc'
+        integer = shamir.str_to_int(string)
+        self.assertIsInstance(integer, int)
+
+    def test_int_to_str_returns_str(self):
+        integer = 5
+        string = shamir.int_to_str(integer)
+        self.assertIsInstance(string, str)
+
+    def test_str_to_int_and_back(self):
+        string = 'abc'
+        integer = shamir.str_to_int(string)
+        recovered_string = shamir.int_to_str(integer)
+        self.assertEqual(string, recovered_string)
+
+    def test_int_to_str_and_back(self):
+        integer = 13
+        string = shamir.int_to_str(integer)
+        recovered_integer = shamir.str_to_int(string)
+        self.assertEqual(integer, recovered_integer)
+
+    def test_decoded_str_equals_original(self):
+        k = 3
+        n = 5
+        p = 2 ** 61 - 1  # 9th Mersenne prime
+        string = 'message'
+        integer = shamir.str_to_int(string)
+        shares = shamir.encode(integer, k=k, n=n, p=p)
+        recovered_integer = shamir.decode(shares, k=k, p=p)
+        recovered_string = shamir.int_to_str(recovered_integer)
+        self.assertEqual(string, recovered_string)
+
+
 if __name__ == '__main__':
     unittest.main()
