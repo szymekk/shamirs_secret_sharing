@@ -52,6 +52,12 @@ class TestShamirSecretSharing(unittest.TestCase):
             decoded = shamir.decode(shares=permutation, k=k, p=p)
             self.assertEqual(message, decoded)
 
+    def test_decode_raises_value_error_on_empty_shares(self):
+        k = 3
+        p = 13
+        with self.assertRaises(ValueError):
+            shamir.decode([], k=k, p=p)
+
 
 class TestStringSharing(unittest.TestCase):
     def test_str_to_int_returns_int(self):

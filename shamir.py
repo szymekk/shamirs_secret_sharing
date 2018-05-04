@@ -75,8 +75,8 @@ def decode(shares: List[Point], k: int, p: int) -> int:
     """
     if k >= p:
         raise ValueError("Minimal number of chunks must be smaller than the field size.")
-    if k > len(shares):
-        raise ValueError("To few shares to recover the secret.")
+    if len(shares) == 0 or k > len(shares):
+        raise ValueError("Too few shares to recover the secret.")
     all_numerator_product = 1
     k_shares = shares[:k]
     for x, y in k_shares:
