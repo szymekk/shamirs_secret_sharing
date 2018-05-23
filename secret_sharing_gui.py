@@ -214,5 +214,10 @@ class MainWindow(QWidget):
 
 if __name__ == '__main__':
     app = QApplication([])
+    font = app.font()
+    current_size = font.pointSize()
+    new_size = int(current_size * 1.5)
+    font.setPointSize(new_size)
+    app.setFont(font)
     main_window = MainWindow()
     sys.exit(app.exec_())
