@@ -1,6 +1,5 @@
 import unittest
 from itertools import permutations
-import random
 
 import shamir
 
@@ -103,40 +102,6 @@ class TestStringSharing(unittest.TestCase):
         recovered_integer = shamir.decode(shares, k=k, p=p)
         recovered_string = shamir.int_to_str(recovered_integer)
         self.assertEqual(string, recovered_string)
-
-
-class TestRandomSampleRange(unittest.TestCase):
-    def test_throws_on_too_large_k(self):
-        a = 1
-        b = 5
-        k = 6
-        with self.assertRaises(ValueError):
-            shamir.random_sample_range(a, b, k)
-
-    def test_returns_k_samples(self):
-        a = 10
-        b = 1000
-        k = 200
-        samples = shamir.random_sample_range(a, b, k)
-        self.assertEqual(len(samples), k)
-
-    def test_returns_unique_samples(self):
-        a = 10
-        b = 1000
-        k = 200
-        samples = shamir.random_sample_range(a, b, k)
-        self.assertEqual(len(samples), len(set(samples)))
-
-    def test_handles_big_ranges(self):
-        a = 0
-        b = 9876543219876543219
-        k = 200
-        samples = shamir.random_sample_range(a, b, k)
-
-        with self.assertRaises(OverflowError):
-            random.sample(range(a, b + 1), k)
-
-        self.assertEqual(len(samples), len(set(samples)))
 
 
 if __name__ == '__main__':

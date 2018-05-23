@@ -1,5 +1,5 @@
 import random
-from typing import List, Tuple, Set
+from typing import List, Tuple
 
 
 def polyval_mod(coeffs: List[int], x: int, p: int) -> int:
@@ -22,23 +22,6 @@ def polyval_mod(coeffs: List[int], x: int, p: int) -> int:
 Point = Tuple[int, int]
 
 
-def random_sample_range(a: int, b: int, k: int) -> List[int]:
-    """Sample k elements without replacements from integer range [a, b].
-    Similar to random.sample(range(a, b + 1), k), but handles large ranges.
-    """
-
-    if b - a + 1 < k:
-        raise ValueError('Requested sample size is larger than population.')
-
-    sampled: Set[int] = set()
-    for i in range(k):
-        r = random.randint(a, b)
-        while r in sampled:
-            r = random.randint(a, b)
-        sampled.add(r)
-    return list(sampled)
-
-
 def encode(message: int, k: int, n: int, p: int) -> List[Point]:
     """message - number to be encoded into shares
     k - minimal number of shares to recover the message
@@ -57,9 +40,7 @@ def encode(message: int, k: int, n: int, p: int) -> List[Point]:
     # get n unique field elements
     # skip 0 because the corresponding share: (0, f(0))
     # contains the secret: f(0) == message
-    # random.sample doesn't work with large ranges
-    # xs = random.sample(range(1, p), n)
-    xs = random_sample_range(1, p - 1, n)
+    xs = range(1, n + 1)
     coeffs = [random.randint(0, p - 1) for _ in range(k)]
     coeffs[-1] = message
     ys = [polyval_mod(coeffs, x, p) for x in xs]
