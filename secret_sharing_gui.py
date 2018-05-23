@@ -5,7 +5,7 @@ from typing import List
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPalette
 from PyQt5.QtWidgets import QApplication, QLineEdit, QWidget, QTextEdit, QPushButton, QSpinBox, \
-    QHBoxLayout, QLabel, QSizePolicy, QErrorMessage, QVBoxLayout, QGroupBox, QGridLayout
+    QHBoxLayout, QLabel, QSizePolicy, QErrorMessage, QVBoxLayout, QGroupBox, QGridLayout, QSplitter
 
 import shamir
 
@@ -136,7 +136,7 @@ class Combiner(QWidget):
         grid.addWidget(QLabel('fragmenty do\npołączenia'), 1, 0)
         grid.addWidget(self.edit_shares, 1, 1)
         grid.addWidget(button, 2, 1)
-        grid.addWidget(QLabel('odtworzony sekret'), 3, 0)
+        grid.addWidget(QLabel('odtworzony\nsekret'), 3, 0)
         grid.addWidget(self.edit_secret, 3, 1)
         self.setLayout(grid)
 
@@ -193,14 +193,11 @@ class MainWindow(QWidget):
         combiner_layout.addWidget(self.combiner)
         combiner_box.setLayout(combiner_layout)
 
-        h_box = QHBoxLayout()
-        h_box.addWidget(splitter_box)
-        h_box.addWidget(combiner_box)
-
         clear_button = QPushButton('Wyczyść wszystko')
         clear_button.clicked.connect(self.reset)
         v_box = QVBoxLayout()
-        v_box.addLayout(h_box)
+        v_box.addWidget(splitter_box)
+        v_box.addWidget(combiner_box)
         v_box.addWidget(clear_button, alignment=Qt.AlignHCenter)
 
         self.setLayout(v_box)
