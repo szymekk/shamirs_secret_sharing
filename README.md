@@ -34,3 +34,7 @@ or (on Windows)
 
 The generated executable is self-contained, i.e. contains copies of the script, the CPython interpreter, and all other dependencies.
 This makes it somewhat big but allows running the application on a computer without the required dependencies (including the Python interpreter).
+
+## Screenshots
+
+![Shamir's secret sharing GUI application window.](gui_split_combine.png)
