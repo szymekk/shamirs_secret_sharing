@@ -115,8 +115,6 @@ class Combiner(QWidget):
         self.edit_secret = QLineEdit(self)
         self.edit_k = QSpinBox(self)
         self.edit_shares = QTextEdit(self)
-        self.message_label = QLabel('abc')
-        self.message_label.setTextInteractionFlags(Qt.TextSelectableByMouse)
 
         make_readonly(self.edit_secret)
 
