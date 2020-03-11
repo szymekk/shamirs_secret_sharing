@@ -3,7 +3,7 @@ import sys
 from typing import List
 
 from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QPalette
+from PyQt5.QtGui import QPalette, QTextOption
 from PyQt5.QtWidgets import QApplication, QLineEdit, QWidget, QTextEdit, QPushButton, QSpinBox, \
     QHBoxLayout, QLabel, QSizePolicy, QErrorMessage, QVBoxLayout, QGroupBox, QGridLayout
 
@@ -53,6 +53,7 @@ class Splitter(QWidget):
         button = QPushButton('podziel sekret')
         button.clicked.connect(self.calc_shares)
 
+        self.edit_shares.setWordWrapMode(QTextOption.WrapAnywhere)
         make_readonly(self.edit_shares)
 
         self.edit_secret.setPlaceholderText('wprowadź sekret')
@@ -116,6 +117,7 @@ class Combiner(QWidget):
         self.edit_k = QSpinBox(self)
         self.edit_shares = QTextEdit(self)
 
+        self.edit_shares.setWordWrapMode(QTextOption.WrapAnywhere)
         make_readonly(self.edit_secret)
 
         self.edit_k.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
