@@ -193,7 +193,7 @@ class MainWindow(QWidget):
         combiner_layout.addWidget(self.combiner)
         combiner_box.setLayout(combiner_layout)
 
-        clear_button = QPushButton('Wyczyść wszystko')
+        clear_button = QPushButton('wyczyść wszystko')
         clear_button.clicked.connect(self.reset)
         v_box = QVBoxLayout()
         v_box.addWidget(splitter_box)
