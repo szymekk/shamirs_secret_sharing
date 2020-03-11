@@ -5,7 +5,7 @@ from typing import List
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPalette
 from PyQt5.QtWidgets import QApplication, QLineEdit, QWidget, QTextEdit, QPushButton, QSpinBox, \
-    QHBoxLayout, QLabel, QSizePolicy, QErrorMessage, QVBoxLayout, QGroupBox, QGridLayout, QSplitter
+    QHBoxLayout, QLabel, QSizePolicy, QErrorMessage, QVBoxLayout, QGroupBox, QGridLayout
 
 import shamir
 
